@@ -2,24 +2,14 @@
     <head>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <style>
-            .googleForm { display: none }
-        </style>
-     
     </head>
     <body>
         <div class="alert alert-primary" style="text-align: center;">
             <span id="timer" align="center" ></span>
         </div>
         <iframe id="form01" class="googleForm" src="https://docs.google.com/forms/d/e/1FAIpQLSc3KDxCEJlPRcDI33r8qkBBlaXiF4NBno4i_7-sjHoH4vJxVw/viewform?embedded=true" width="100%" height="800px" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
-         <iframe id="form02" class="googleForm" src="https://docs.google.com/forms/d/e/1FAIpQLSdsqZUwIr2EyHG_tbrMrE9DgDno6NcnlFjTH8a7Eu_wVV88jg/viewform?embedded=true" width="100%" height="800px" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
-        <iframe id="form03" class="googleForm" src="https://docs.google.com/forms/d/e/1FAIpQLSddmuM4vuRP4bhlzbQKzcj9tclm9G6cm5wtpiYtqOYSKNdd5g/viewform?embedded=true" width="100%" height="800px" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
     </body>
        <script>
-            const randomId = Math.floor(Math.random() * 3);
-            var list = document.getElementsByClassName("googleForm");
-            list[randomId].style.display = 'block';
-
             function checklength(i) {
                 'use strict';
                 if (i < 10) {

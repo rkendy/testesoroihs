@@ -1,33 +1,33 @@
 const GOOGLE_FORM_ID = "1ERbZ3bgTHpkL634y14DZuW_NkSVsL3jSavK54G8qyCI";
 const GOOGLE_SPREADSHEET_ID = "1-2DCD4Y2AtDinJNY-VwbsyHJkHj8t9vkMpZAgtIbmQY";
-const GOOGLE_FORM_IDS = [
-  {
-    formId: '1ERbZ3bgTHpkL634y14DZuW_NkSVsL3jSavK54G8qyCI',
-    formItemId: '416287583',
-    name: 'Respostas ao formulário 1',
-    columnId: 1 
-  },
-  {
-    formId: '1fi7yfcvTM-IxQCODlxvM3-IxJP9RxNvMzIbpqHtQ_X8',
-    formItemId: '416287583',
-    name: 'Respostas ao formulário 2',
-    columnId: 2
-  },
-  {
-    formId: '1etGAia7Qi5wcxSp96X7VckQQ1q34wlvR8BA-OeHzKqM',
-    formItemId: '416287583',
-    name: 'Respostas ao formulário 3',
-    columnId: 3
-  }
-]
+// const GOOGLE_FORM_IDS = [
+//   {
+//     formId: '1ERbZ3bgTHpkL634y14DZuW_NkSVsL3jSavK54G8qyCI',
+//     formItemId: '416287583',
+//     name: 'Respostas ao formulário 1',
+//     columnId: 1 
+//   },
+//   {
+//     formId: '1fi7yfcvTM-IxQCODlxvM3-IxJP9RxNvMzIbpqHtQ_X8',
+//     formItemId: '416287583',
+//     name: 'Respostas ao formulário 2',
+//     columnId: 2
+//   },
+//   {
+//     formId: '1etGAia7Qi5wcxSp96X7VckQQ1q34wlvR8BA-OeHzKqM',
+//     formItemId: '416287583',
+//     name: 'Respostas ao formulário 3',
+//     columnId: 3
+//   }
+// ]
 
 function onFormSubmit(event) {
-  Logger.log(JSON.stringify(event));
-  const currentSheetName = SpreadsheetApp.getActiveSpreadsheet().getSheetName();
-  Logger.log(currentSheetName);
+  // Logger.log(JSON.stringify(event));
+  // const currentSheetName = SpreadsheetApp.getActiveSpreadsheet().getSheetName();
+  // Logger.log(currentSheetName);
   const dataHora = event.range.getCell(1,4).getValue();
   eraseItem(dataHora);
-  populateList(currentSheetName);
+  populateList();
 }
 
 function eraseItem(dataHora) {
@@ -42,26 +42,21 @@ function eraseItem(dataHora) {
   }
 }
 
-function test() {
-  populateList(GOOGLE_FORM_IDS[2].name);
+
+function populateList() {
+  var list = FormApp.openById(GOOGLE_FORM_ID).getItemById("416287583");
+  // const reg = GOOGLE_FORM_IDS.find( element => element.name === currentSheetName);  
+  // var list = FormApp.openById(reg.formId).getItemById(reg.formItemId);
+  list.asListItem().setChoiceValues(getAvailableHours());
 }
 
-function populateList(currentSheetName) {
-  // var list = FormApp.openById(GOOGLE_FORM_ID).getItemById("416287583");
-  const reg = GOOGLE_FORM_IDS.find( element => element.name === currentSheetName);  
-  var list = FormApp.openById(reg.formId).getItemById(reg.formItemId);
-  // getAvailableHours(reg.columnId);
-  list.asListItem().setChoiceValues(getAvailableHours(reg.columnId));
-}
-
-function getAvailableHours(columnId) {
-  Logger.log("columnId: " + columnId);
-  const targetSheet = SpreadsheetApp.openById(GOOGLE_SPREADSHEET_ID).getSheetByName('Disponiveis');  
+function getAvailableHours() {
+  const targetSheet = SpreadsheetApp.openById(GOOGLE_SPREADSHEET_ID).getSheetByName('Disponiveis');
   const lastRow = targetSheet.getLastRow();
-  const sourceRange = targetSheet.getRange(1, 1, lastRow, 2);
-  const filtered = sourceRange.getValues().filter(elem => elem[1] == columnId);
-  return filtered.map(e => e[0]);
-  // return sourceRange.getValues();
+  const sourceRange = targetSheet.getRange(1, 1, lastRow, 1);
+  // const filtered = sourceRange.getValues().filter(elem => elem[1] == columnId);
+  // return filtered.map(e => e[0]);
+  return sourceRange.getValues();
 }
 
 
