@@ -19,7 +19,7 @@
             }
 
             var minutes, seconds, count, counter, timer;
-            count = 120; //seconds
+            count = 180; //seconds
             counter = setInterval(timer, 1000);
 
             function timer() {
@@ -34,7 +34,7 @@
                 document.getElementById("timer").innerHTML = 'Para atualizar os hor&#225;rios dispon&#237;veis, esta p&#225;gina ser&#225; recarregada em ' + minutes + ':' + seconds + ' ';
                 if (count === 0) {
                     location.reload(true);
-                    count = 120;
+                    count = 180;
                 }
             }
         </script>
